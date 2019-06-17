@@ -2,6 +2,6 @@
 	"name": "asha23/core-functionality",
 	"type": "wordpress-plugin",
 	"require": {
-	  "composer/installers": "*"
+	  "composer/installers": "1.0.4"
 	}
   }

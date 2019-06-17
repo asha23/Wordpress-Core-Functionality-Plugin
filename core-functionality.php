@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Core Functionality
  * Description: This contains all your site's core functionality so that it is theme independent. <strong>It should always be activated</strong> - Currently includes head cleanup custom post types and some other helpers</p>.
- * Version:     1.0.1
+ * Version:     1.0.4
  * Author:      Ash Whiting
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -15,7 +15,7 @@
  * FOR A PARTICULAR PURPOSE.
  *
  * @package    CoreFunctionality
- * @since      1.0.1
+ * @since      1.0.4
  * @copyright  Copyright (c) 2019, Ash Whiting
  * @license    GPL-2.0+
  */
