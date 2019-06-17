@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Core Functionality
  * Description: This contains all your site's core functionality so that it is theme independent. <strong>It should always be activated</strong>.
- * Version:     1.2.0
- * Author:      Bill Erickson & Jared Atchison
+ * Version:     1.0.1
+ * Author:      Ash Whiting
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License version 2, as published by the
@@ -15,14 +15,13 @@
  * FOR A PARTICULAR PURPOSE.
  *
  * @package    CoreFunctionality
- * @since      1.0.0
- * @copyright  Copyright (c) 2014, Bill Erickson & Jared Atchison
+ * @since      1.0.1
+ * @copyright  Copyright (c) 2019, Ash Whiting
  * @license    GPL-2.0+
  */
 
 // Plugin directory
 define( 'EA_DIR' , plugin_dir_path( __FILE__ ) );
 
-require_once( EA_DIR . '/inc/general.php' );
-require_once( EA_DIR . '/inc/wordpress-cleanup.php' );
-require_once( EA_DIR . '/inc/kill-trackbacks.php' );
+require_once( EA_DIR . '/inc/custom-post-types.php' );
+
