@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Core Functionality
- * Description: This contains all your site's core functionality so that it is theme independent. <strong>It should always be activated</strong>.
+ * Description: This contains all your site's core functionality so that it is theme independent. <strong>It should always be activated</strong><p>Currently includes head cleanup custom post types and some other helpers</p>.
  * Version:     1.0.1
  * Author:      Ash Whiting
  *
