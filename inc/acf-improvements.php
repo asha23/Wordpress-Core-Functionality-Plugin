@@ -114,6 +114,12 @@ if(is_admin()):
             color:white!important;
             border:#666;
         }
+		
+		.acf-label .description {
+			padding:8px;
+			background:red;
+			color:white;
+		}
 
     </style>
     <?php
