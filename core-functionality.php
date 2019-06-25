@@ -26,4 +26,5 @@ define( 'EA_DIR' , plugin_dir_path( __FILE__ ) );
 require_once( EA_DIR . '/inc/custom-post-types.php' );
 require_once( EA_DIR . '/inc/header-cleanup.php' );
 require_once( EA_DIR . '/inc/utilities.php' );
+require_once( EA_DIR . '/inc/acf-improvements.php' );
 
