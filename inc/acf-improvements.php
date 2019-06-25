@@ -116,9 +116,13 @@ if(is_admin()):
         }
 		
 		.acf-label .description {
-			padding:8px;
+			padding:8px!important;
+			margin-top:5px;
+			margin-bottom:10px;
 			background:red;
 			color:white;
+			display: inline-block;
+    		border-radius: 6px;
 		}
 
     </style>
