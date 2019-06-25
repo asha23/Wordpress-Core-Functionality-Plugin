@@ -122,7 +122,7 @@ if(is_admin()):
 			background: #ebebeb;
 			color: black;
 			/* font-weight: 900; */
-			display: inline-block;
+			display: inline-block!important;
 			border-radius: 6px;
 		}
 
