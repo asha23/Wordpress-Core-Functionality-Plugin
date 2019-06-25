@@ -124,6 +124,7 @@ if(is_admin()):
 			/* font-weight: 900; */
 			display: inline-block!important;
 			border-radius: 6px;
+			font-size:10px!important;
 		}
 
     </style>
