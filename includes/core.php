@@ -11,7 +11,6 @@ final class core
 
 	public function listen()
 	{
-		add_action( 'after_setup_theme', [$this, 'seed_ahoy'], 16 );
 		add_action( 'admin_init', [$this, 'seed_remove_dashboard_meta'] );
 		add_action( 'admin_menu', [$this, 'seed_remove_menu_items']);
 		add_action( 'after_setup_theme', [$this, 'seed_remove_background_menu_item'], 100 );

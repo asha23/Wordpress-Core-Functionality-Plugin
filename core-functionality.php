@@ -1,9 +1,14 @@
 <?php
 /**
- * Plugin Name: Core Functionality
+ * Plugin Name: Arlo Framework - Core Functionality
  * Description: This contains all your site's core functionality so that it is theme independent. <strong>It should always be activated</strong> - Currently includes head cleanup custom post types and some other helpers</p>.
- * Version:     1.0.4
- * Author:      Ash Whiting
+ * Version:     1.0.5
+ * Author:      Ash Whiting <ash_whiting@hotmail.com>
+ * Author URI:  http://ashwhiting.com
+ * Text Domain: arlo
+ * Requires at least: 5.0
+ * Tested up to: 5.0
+ * Requires PHP: 7.0
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License version 2, as published by the

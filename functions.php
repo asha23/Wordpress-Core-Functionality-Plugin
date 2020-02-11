@@ -8,15 +8,14 @@ if(!function_exists('\\arlo\\init')) {
         $core = new core();
         $core->listen();
 
-        $menus = new menus();
-        $menus->listen();
-
         $custom_post_types = new custom_post_types();
         $custom_post_types->listen();
+        
+        $acf_improvements = new acf_improvements();
+        $acf_improvements->listen();
     }
 }
-
-add_action( 'wp_loaded', '\\arlo\\init' );
+add_action( 'plugins_loaded', '\\arlo\\init' );
 
 
 ?>
