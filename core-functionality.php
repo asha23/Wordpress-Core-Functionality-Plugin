@@ -16,15 +16,16 @@
  *
  * @package    CoreFunctionality
  * @since      1.0.4
- * @copyright  Copyright (c) 2019, Ash Whiting
+ * @copyright  Copyright (c) 2020, Ash Whiting
  * @license    GPL-2.0+
  */
+
+if (! defined('WPINC')) :
+    exit;
+endif;
 
 // Plugin directory
 define( 'EA_DIR' , plugin_dir_path( __FILE__ ) );
 
-require_once( EA_DIR . '/inc/custom-post-types.php' );
-require_once( EA_DIR . '/inc/header-cleanup.php' );
-require_once( EA_DIR . '/inc/utilities.php' );
-require_once( EA_DIR . '/inc/acf-improvements.php' );
+require_once EA_DIR . "vendor/autoload.php";
 
