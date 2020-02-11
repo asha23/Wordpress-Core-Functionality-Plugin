@@ -5,6 +5,12 @@ namespace arlo;
 if(!function_exists('\\arlo\\init')) {
     function init()
     {
+        /**
+		 * Bundle ACF Plugin
+		 */
+		$acf_plugin = new acf_plugin();
+        $acf_plugin->listen();
+        
         $core = new core();
         $core->listen();
 
