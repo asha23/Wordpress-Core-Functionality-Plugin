@@ -1,5 +1,3 @@
 # Core functionality plugin
 
-This contains all your site's core functionality so that it is theme independent.
-
-```composer install```
+This contains a load of cleanup items and other theme-independent helpers
