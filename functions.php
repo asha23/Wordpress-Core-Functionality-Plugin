@@ -8,7 +8,7 @@ if(!function_exists('\\arlo\\init')) {
 	    $acf_plugin_bundle = new acf_plugin_bundle();
         $acf_plugin_bundle->listen();
         
-        $head_cleanup = new core();
+        $head_cleanup = new head_cleanup();
         $head_cleanup->listen();
 
         $mime_types = new mime_types();
