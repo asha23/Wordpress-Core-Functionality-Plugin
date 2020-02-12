@@ -36,6 +36,15 @@ final class head_cleanup
 			add_filter('use_default_gallery_style', '__return_false');
 			add_filter('emoji_svg_url', '__return_false');
 			add_filter('the_generator', '__return_false');
+
+			$this->seed_rss_version();
+			$this->seed_remove_wp_widget_recent_comments_style();
+			$this->seed_theme_support();
+			$this->seed_remove_dashboard_meta();
+			$this->seed_remove_admin_menus();
+			$this->seed_remove_menu_items();
+			$this->seed_remove_background_menu_item();
+
 		});
 
 		add_filter('style_loader_tag', function ($input) {
@@ -125,27 +134,6 @@ final class head_cleanup
 		);
 	}
 
-	public function seed_filter_ptags_on_images($content){
-		return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
-	}
-
-	public function seed_excerpt_more($more) {
-		global $post;
-		// edit here if you like
-		return '...  <a class="excerpt-read-more" href="'. get_permalink($post->ID) . '" title="'. __( 'Read', 'SEEDtheme' ) . get_the_title($post->ID).'">'. __( '<p>&nbsp;</p><button class="btn btn-info">Read more <i class="fa fa-angle-double-right"></i></button>', 'SEEDtheme' ) .'</a>';
-	}
-
-	public function seed_theme_body_class($classes) {
-		global $post;
-		if (!$post) return $classes;
-		$classes[] = 'page-'.$post->post_name;
-		if ($post->post_parent) {
-			$ppost = get_post($post->post_parent);
-			$classes[] = 'section-'.$ppost->post_name;
-		}
-		return $classes;
-	}
-
 	public function seed_remove_admin_menus() {
 		remove_menu_page( 'edit-comments.php' ); // comments
 	}
@@ -162,7 +150,7 @@ final class head_cleanup
 		remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
 	}
 
-	public function seed_remove_menu_items(){
+	public function seed_remove_menu_items() {
 		global $submenu;
 		unset($submenu['themes.php'][6]); // remove customize link
 	}
