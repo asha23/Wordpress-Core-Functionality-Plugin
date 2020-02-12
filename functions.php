@@ -5,17 +5,14 @@ namespace arlo;
 if(!function_exists('\\arlo\\init')) {
     function init()
     {
-        /**
-	* Bundle ACF Plugin
-	*/
-	$acf_plugin = new acf_plugin_bundle();
-        $acf_plugin->listen();
+	    $acf_plugin_bundle = new acf_plugin_bundle();
+        $acf_plugin_bundle->listen();
         
-        $core = new core();
-        $core->listen();
+        $head_cleanup = new core();
+        $head_cleanup->listen();
 
-        $custom_post_types = new custom_post_types();
-        $custom_post_types->listen();
+        $mime_types = new mime_types();
+        $mime_types->listen();
         
         $acf_improvements = new acf_improvements();
         $acf_improvements->listen();

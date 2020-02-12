@@ -2,7 +2,7 @@
 
 namespace arlo;
 
-final class core
+final class head_cleanup
 {
 	public function __construct()
 	{
@@ -11,36 +11,46 @@ final class core
 
 	public function listen()
 	{
-		add_action( 'admin_init', [$this, 'seed_remove_dashboard_meta'] );
-		add_action( 'admin_menu', [$this, 'seed_remove_menu_items']);
-		add_action( 'after_setup_theme', [$this, 'seed_remove_background_menu_item'], 100 );
-		add_action('init', [$this, 'seed_rss_version']);
-		add_filter( 'the_generator', [$this, 'seed_rss_version'] );
-		add_filter( 'wp_head', [$this, 'seed_remove_wp_widget_recent_comments_style'], 1 );
-		add_action( 'wp_head', [$this, 'seed_remove_recent_comments_style'], 1 );
-		add_filter( 'gallery_style', [$this, 'seed_gallery_style'] );
-		add_filter( 'widget_text', [$this, 'seed_do_shortcode']);
-		add_filter('body_class', [$this, 'seed_theme_body_class']);
-		add_filter( 'the_content', [$this, 'seed_filter_ptags_on_images'] );
-		add_filter( 'excerpt_more', [$this, 'seed_excerpt_more'] );
-		add_action('admin_menu', [$this, 'seed_remove_admin_menus']);
+		add_action('init', function () {
+			remove_action('wp_head', 'feed_links_extra', 3);
+			add_action('wp_head', 'ob_start', 1, 0);
+			add_action('wp_head', function () {
+				$pattern = '/.*' . preg_quote(esc_url(get_feed_link('comments_' . get_default_feed())), '/') . '.*[\r\n]+/';
+				echo preg_replace($pattern, '', ob_get_clean());
+			}, 3, 0);
+			remove_action('wp_head', 'rsd_link');
+			remove_action('wp_head', 'wlwmanifest_link');
+			remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10);
+			remove_action('wp_head', 'wp_generator');
+			remove_action('wp_head', 'wp_shortlink_wp_head', 10);
+			remove_action('wp_head', 'print_emoji_detection_script', 7);
+			remove_action('admin_print_scripts', 'print_emoji_detection_script');
+			remove_action('wp_print_styles', 'print_emoji_styles');
+			remove_action('admin_print_styles', 'print_emoji_styles');
+			remove_action('wp_head', 'wp_oembed_add_discovery_links');
+			remove_action('wp_head', 'wp_oembed_add_host_js');
+			remove_action('wp_head', 'rest_output_link_wp_head', 10);
+			remove_filter('the_content_feed', 'wp_staticize_emoji');
+			remove_filter('comment_text_rss', 'wp_staticize_emoji');
+			remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
+			add_filter('use_default_gallery_style', '__return_false');
+			add_filter('emoji_svg_url', '__return_false');
+			add_filter('the_generator', '__return_false');
+		});
 
-		remove_action( 'wp_head', 'rsd_link' );
-		remove_action( 'wp_head', 'wlwmanifest_link' );
-		remove_action( 'wp_head', 'index_rel_link' );
-		remove_action( 'wp_head', 'parent_post_rel_link', 10, 0 );
-		remove_action( 'wp_head', 'start_post_rel_link', 10, 0 );
-		remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
-		remove_action( 'wp_head', 'wp_generator' );
-		add_filter( 'style_loader_src', [$this, 'seed_remove_wp_ver_css_js'], 9999 );
-		add_filter( 'script_loader_src', [$this, 'seed_remove_wp_ver_css_js'], 9999 );
-
-		add_action('login_head', [$this, 'custom_login_logo']);
-
-
-		add_filter('acf/settings/remove_wp_meta_box', '__return_true');
-
-		$this->seed_theme_support();
+		add_filter('style_loader_tag', function ($input) {
+			preg_match_all(
+				"!<link rel='stylesheet'\s?(id='[^']+')?\s+href='(.*)' type='text/css' media='(.*)' />!",
+				$input,
+				$matches
+			);
+			if (empty($matches[2])) {
+				return $input;
+			}
+			// Only display media if it is meaningful
+			$media = $matches[3][0] !== '' && $matches[3][0] !== 'all' ? ' media="' . $matches[3][0] . '"' : '';
+			return '<link rel="stylesheet" href="' . $matches[2][0] . '"' . $media . '>' . "\n";
+		});
 	}
 
 	public function seed_rss_version() {
