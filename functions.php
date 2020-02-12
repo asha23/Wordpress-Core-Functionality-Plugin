@@ -8,7 +8,7 @@ if(!function_exists('\\arlo\\init')) {
         /**
 		 * Bundle ACF Plugin
 		 */
-		$acf_plugin = new acf_plugin();
+		$acf_plugin = new acf_plugin_bundle();
         $acf_plugin->listen();
         
         $core = new core();
