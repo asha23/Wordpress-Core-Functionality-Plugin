@@ -5,10 +5,7 @@
     "description": "Theme core functionality",
     "type": "library",
     "keywords": [
-      "wordpress",
-      "autodesk",
-      "forge",
-      "plugin"
+      "wordpress"
     ],
     "homepage": "http://ashwhiting.comk",
     "authors": [
