@@ -40,8 +40,6 @@ final class head_cleanup
 			$this->seed_rss_version();
 			$this->seed_remove_wp_widget_recent_comments_style();
 			$this->seed_theme_support();
-			$this->seed_remove_dashboard_meta();
-			$this->seed_remove_admin_menus();
 			$this->seed_remove_menu_items();
 			$this->seed_remove_background_menu_item();
 
@@ -132,10 +130,6 @@ final class head_cleanup
 				'footer-links' => __( 'Footer Links', 'SEEDtheme' ) // secondary nav in footer
 			)
 		);
-	}
-
-	public function seed_remove_admin_menus() {
-		remove_menu_page( 'edit-comments.php' ); // comments
 	}
 
 	public function seed_remove_dashboard_meta() {
