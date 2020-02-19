@@ -2,15 +2,10 @@
 
 // Add Flexible Content layout title
 
-namespace arlo;
+namespace Arlo;
 
-final class acf_improvements
+final class AcfImprovements
 {
-    public function __construct()
-    {
-
-    }
-
     public function listen()
     {
         add_filter('acf/fields/flexible_content/layout_title', [$this, 'arlo_layout_title'], 10, 4);
@@ -20,7 +15,7 @@ final class acf_improvements
         add_filter('acf/settings/remove_wp_meta_box', '__return_true');
     }
 
-    public function arlo_layout_title($title, $field, $layout, $i)
+    public static function arlo_layout_title($title, $field, $layout, $i)
     {
         if ($value = get_sub_field('layout_title')) {
             return $value;
@@ -37,11 +32,11 @@ final class acf_improvements
         return $title;
     }
 
-    public function arlo_acf_init() {
+    public static function arlo_acf_init() {
         //acf_update_setting('google_api_key', 'AIzaSyDMW59kxun73jWTdoyRyvnDVZCKZL50M5s');
     }
 
-    public function arlo_acf_admin_head() {
+    public static function arlo_acf_admin_head() {
         if(is_admin()):
     ?>
         <style type="text/css">

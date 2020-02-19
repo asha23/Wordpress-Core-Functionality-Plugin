@@ -1,15 +1,10 @@
 <?php
 
-namespace arlo;
+namespace Arlo;
 
-final class head_cleanup
+class HeadCleanup
 {
-	public function __construct()
-	{
-
-	}
-
-	public function listen()
+	public static function listen()
 	{
 		add_action('init', function () {
 			remove_action('wp_head', 'feed_links_extra', 3);
@@ -37,12 +32,13 @@ final class head_cleanup
 			add_filter('emoji_svg_url', '__return_false');
 			add_filter('the_generator', '__return_false');
 
-			$this->seed_rss_version();
-			$this->seed_remove_wp_widget_recent_comments_style();
-			$this->seed_theme_support();
-			$this->seed_remove_menu_items();
-			$this->seed_remove_background_menu_item();
-
+			self::seed_rss_version();
+			self::seed_remove_wp_widget_recent_comments_style();
+			self::seed_theme_support();
+			self::seed_remove_menu_items();
+			self::seed_remove_background_menu_item();
+			self::seed_remove_recent_comments_style();
+			self::seed_remove_dashboard_meta();
 		});
 
 		add_filter('style_loader_tag', function ($input) {
@@ -60,23 +56,17 @@ final class head_cleanup
 		});
 	}
 
-	public function seed_rss_version() {
+	public static function seed_rss_version() {
 		return '';
 	}
 
-	public function seed_remove_wp_ver_css_js( $src ) {
-		if ( strpos( $src, 'ver=' ) )
-			$src = remove_query_arg( 'ver', $src );
-		return $src;
-	}
-
-	public function seed_remove_wp_widget_recent_comments_style() {
+	public static function seed_remove_wp_widget_recent_comments_style() {
 		if ( has_filter( 'wp_head', 'wp_widget_recent_comments_style' ) ) {
 			remove_filter( 'wp_head', 'wp_widget_recent_comments_style' );
 		}
 	}
 	
-	public function seed_remove_recent_comments_style() {
+	public static function seed_remove_recent_comments_style() {
 		global $wp_widget_factory;
 
 		if (isset($wp_widget_factory->widgets['WP_Widget_Recent_Comments'])) {
@@ -84,11 +74,11 @@ final class head_cleanup
 		}
 	}
 	
-	public function seed_gallery_style($css) {
+	public static function seed_gallery_style($css) {
 		return preg_replace( "!<style type='text/css'>(.*?)</style>!s", '', $css );
 	}
 
-	public function seed_theme_support() {
+	public static function seed_theme_support() {
 
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'custom-background',
@@ -132,7 +122,7 @@ final class head_cleanup
 		);
 	}
 
-	public function seed_remove_dashboard_meta() {
+	public static function seed_remove_dashboard_meta() {
 		remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
 		remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
 		remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
@@ -144,17 +134,12 @@ final class head_cleanup
 		remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
 	}
 
-	public function seed_remove_menu_items() {
+	public static function seed_remove_menu_items() {
 		global $submenu;
 		unset($submenu['themes.php'][6]); // remove customize link
 	}
 
-	
-	function seed_remove_background_menu_item() {
-		remove_theme_support( 'custom-background' );
-	}
-
-	public function seed_custom_login_logo() {
+	public static function seed_custom_login_logo() {
 		echo '<style type="text/css">h1 a { background-image: url('.get_bloginfo('template_directory').'/build/images/custom-login-logo.png) !important; height:82px!important; background-size:164px!important; width:200px!important;}</style>';
 	}
 

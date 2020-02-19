@@ -1,27 +1,17 @@
 <?php
 
-namespace arlo;
+namespace Arlo;
 
-final class utilities 
+class Utilities 
 {
-	public function __construct()
-	{
-
-	}
-
-	public function listen()
-	{
-
-	}
-
-	public function get_first_para($string)
+	public static function get_first_para($string)
 	{
 		$string = substr($string,0, strpos($string, "</p>")+4);
 		$string = str_replace("<p>", "", str_replace("<p/>", "", $string));
 		return $string;
 	}
 
-	public function limit_text($text, $limit)
+	public static function limit_text($text, $limit)
 	{
 		if (str_word_count($text, 0) > $limit) {
 			$words = str_word_count($text, 2);

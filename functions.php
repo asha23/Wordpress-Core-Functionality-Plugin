@@ -1,20 +1,20 @@
 <?php
 
-namespace arlo;
+namespace Arlo;
 
 if(!function_exists('\\arlo\\init')) {
     function init()
     { 
-        $head_cleanup = new head_cleanup();
+        $head_cleanup = new HeadCleanup();
         $head_cleanup->listen();
 
-        $mime_types = new mime_types();
+        $mime_types = new MimeTypes();
         $mime_types->listen();
         
-        $acf_improvements = new acf_improvements();
+        $acf_improvements = new AcfImprovements();
         $acf_improvements->listen();
 
-        $utilities = new utilities();
+        $utilities = new Utilities();
         $utilities->listen();
     }
 }

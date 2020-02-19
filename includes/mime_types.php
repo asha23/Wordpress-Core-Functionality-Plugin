@@ -1,15 +1,10 @@
 <?php
 
-namespace arlo;
+namespace Arlo;
 
-final class mime_types 
+class MimeTypes
 {
-    public function __construct()
-    {
-
-    }
-
-    public function listen()
+    public static function listen()
     {
         add_filter('upload_mimes', function ($mimes) {
             $mimes['svg'] = 'image/svg+xml';
