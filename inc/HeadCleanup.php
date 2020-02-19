@@ -35,8 +35,6 @@ class HeadCleanup
 			add_action('wp_before_admin_bar_render', [$this, 'arlo_remove_comments_admin_bar']);
 			add_action('init', [$this, 'arlo_remove_comments_posts_pages'], 100);
 
-
-
 			self::arlo_rss_version();
 			self::arlo_remove_wp_widget_recent_comments_style();
 			self::arlo_theme_support();
@@ -119,8 +117,8 @@ class HeadCleanup
 	
 		register_nav_menus(
 			array(
-				'main-nav' => __( 'The Main Menu', 'SEEDtheme' ),   // main nav in header
-				'footer-links' => __( 'Footer Links', 'SEEDtheme' ) // secondary nav in footer
+				'main-nav' => __( 'The Main Nav', 'arlo_theme' ),   // main nav in header
+				'footer-nav' => __( 'Footer Nav', 'arlo_theme' ) // secondary nav in footer
 			)
 		);
 	}
