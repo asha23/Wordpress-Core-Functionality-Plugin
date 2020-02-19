@@ -9,17 +9,13 @@ class ComposerStaticInitee51a8d896f392755db23208a0448dd8
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        'd5fdbddb3dddaf63260ed35aeb64221c' => __DIR__ . '/../..' . '/functions.php',
+        '73f34c54e2efb42ba1c1a6417c315ee4' => __DIR__ . '/../..' . '/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
-        ),
-        'a' => 
-        array (
-            'arlo\\' => 5,
         ),
         'W' => 
         array (
@@ -38,6 +34,10 @@ class ComposerStaticInitee51a8d896f392755db23208a0448dd8
             'Doctrine\\Instantiator\\' => 22,
             'DeepCopy\\' => 9,
         ),
+        'A' => 
+        array (
+            'Arlo\\' => 5,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -46,10 +46,6 @@ class ComposerStaticInitee51a8d896f392755db23208a0448dd8
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-        ),
-        'arlo\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/includes',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -70,6 +66,10 @@ class ComposerStaticInitee51a8d896f392755db23208a0448dd8
         'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
+        ),
+        'Arlo\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/inc',
         ),
     );
 

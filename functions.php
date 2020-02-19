@@ -15,7 +15,6 @@ if(!function_exists('\\arlo\\init')) {
         $acf_improvements->listen();
 
         $utilities = new Utilities();
-        $utilities->listen();
     }
 }
 add_action( 'plugins_loaded', '\\arlo\\init' );

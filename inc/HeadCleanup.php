@@ -4,7 +4,7 @@ namespace Arlo;
 
 class HeadCleanup
 {
-	public static function listen()
+	public function listen()
 	{
 		add_action('init', function () {
 			remove_action('wp_head', 'feed_links_extra', 3);
@@ -31,14 +31,17 @@ class HeadCleanup
 			add_filter('use_default_gallery_style', '__return_false');
 			add_filter('emoji_svg_url', '__return_false');
 			add_filter('the_generator', '__return_false');
+			add_action('admin_menu', [$this, 'arlo_remove_comments_menu']);
+			add_action('wp_before_admin_bar_render', [$this, 'arlo_remove_comments_admin_bar']);
+			add_action('init', [$this, 'arlo_remove_comments_posts_pages'], 100);
 
-			self::seed_rss_version();
-			self::seed_remove_wp_widget_recent_comments_style();
-			self::seed_theme_support();
-			self::seed_remove_menu_items();
-			self::seed_remove_background_menu_item();
-			self::seed_remove_recent_comments_style();
-			self::seed_remove_dashboard_meta();
+
+
+			self::arlo_rss_version();
+			self::arlo_remove_wp_widget_recent_comments_style();
+			self::arlo_theme_support();
+			self::arlo_remove_menu_items();
+			self::arlo_remove_recent_comments_style();
 		});
 
 		add_filter('style_loader_tag', function ($input) {
@@ -56,17 +59,17 @@ class HeadCleanup
 		});
 	}
 
-	public static function seed_rss_version() {
+	public static function arlo_rss_version() {
 		return '';
 	}
 
-	public static function seed_remove_wp_widget_recent_comments_style() {
+	public static function arlo_remove_wp_widget_recent_comments_style() {
 		if ( has_filter( 'wp_head', 'wp_widget_recent_comments_style' ) ) {
 			remove_filter( 'wp_head', 'wp_widget_recent_comments_style' );
 		}
 	}
 	
-	public static function seed_remove_recent_comments_style() {
+	public static function arlo_remove_recent_comments_style() {
 		global $wp_widget_factory;
 
 		if (isset($wp_widget_factory->widgets['WP_Widget_Recent_Comments'])) {
@@ -74,11 +77,11 @@ class HeadCleanup
 		}
 	}
 	
-	public static function seed_gallery_style($css) {
+	public static function arlo_gallery_style($css) {
 		return preg_replace( "!<style type='text/css'>(.*?)</style>!s", '', $css );
 	}
 
-	public static function seed_theme_support() {
+	public static function arlo_theme_support() {
 
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'custom-background',
@@ -122,25 +125,30 @@ class HeadCleanup
 		);
 	}
 
-	public static function seed_remove_dashboard_meta() {
-		remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
-		remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
-		remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
-		remove_meta_box( 'dashboard_secondary', 'dashboard', 'normal' );
-		remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
-		remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' );
-		remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
-		remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
-		remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
-	}
-
-	public static function seed_remove_menu_items() {
+	public static function arlo_remove_menu_items() {
 		global $submenu;
 		unset($submenu['themes.php'][6]); // remove customize link
 	}
 
-	public static function seed_custom_login_logo() {
+	public static function arlo_custom_login_logo() {
 		echo '<style type="text/css">h1 a { background-image: url('.get_bloginfo('template_directory').'/build/images/custom-login-logo.png) !important; height:82px!important; background-size:164px!important; width:200px!important;}</style>';
+	}
+
+	public function arlo_remove_comments_menu()
+	{
+		remove_menu_page( 'edit-comments.php' );
+	}
+
+	public function arlo_remove_comments_admin_bar()
+	{
+		global $wp_admin_bar;
+     	$wp_admin_bar->remove_menu('comments');
+	}
+
+	public function arlo_remove_comments_posts_pages()
+	{
+		remove_post_type_support( 'post', 'comments' );
+    	remove_post_type_support( 'page', 'comments' );
 	}
 
 }

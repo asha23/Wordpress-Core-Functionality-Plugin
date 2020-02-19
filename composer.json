@@ -22,7 +22,7 @@
     },
     "autoload": {
       "psr-4": {
-        "arlo\\": "includes/"
+        "Arlo\\": "inc/"
       },
       "files": [
         "functions.php"
